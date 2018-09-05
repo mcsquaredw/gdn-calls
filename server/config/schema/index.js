@@ -39,10 +39,16 @@ const call = Schema(
   { timestamps: { createdAt: "createdAt" } }
 );
 
+const user = Schema({
+  username: String,
+  password: String
+});
+
 module.exports = {
   Area: mongoose.model("Area", area),
   ContactType: mongoose.model("ContactType", contactType),
   Contractor: mongoose.model("Contractor", contractor),
   CallType: mongoose.model("CallType", callType),
-  Call: mongoose.model("Call", call)
+  Call: mongoose.model("Call", call),
+  User: mongoose.model("User", user)
 };

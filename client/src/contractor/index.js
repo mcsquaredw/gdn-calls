@@ -22,6 +22,7 @@ export default class Contractor extends Component {
                   title={`${currentContractor.name} Map`}
                   location={office.postcode}
                 />
+                <br />
                 {office.address}
                 <br />
                 {office.postcode}
