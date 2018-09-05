@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+  font-family: sans-serif;
+}
+
+table tr th {
+  font-weight: bold;
+}
+
+th,
+td {
+  padding: 10px;
+  width: 20%;
+  text-align: center;
+}

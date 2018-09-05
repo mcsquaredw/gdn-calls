@@ -1,0 +1,94 @@
+html,
+body {
+  box-sizing: border-box;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.App-header {
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(
+    left,
+    #ffffff 0%,
+    #a765d3 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    left,
+    #ffffff 0%,
+    #a765d3 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #a765d3 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#a765d3',GradientType=1 ); /* IE6-9 */
+  color: #a765d3;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 40px;
+}
+
+h1 {
+  font-size: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 5px;
+}
+
+h2 {
+  font-size: 30px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.container {
+  width: 100%;
+}
+
+.call {
+  float: left;
+  width: 30%;
+  padding: 5px;
+  margin: 5px;
+}
+
+.call select {
+  width: 100%;
+  font-size: 2em;
+}
+
+.call button {
+  width: 100%;
+  font-size: 2em;
+}
+
+.area {
+  float: left;
+  width: 30%;
+  padding: 5px;
+  margin: 5px;
+}
+
+.contractor {
+  float: left;
+  width: 30%;
+  padding: 5px;
+  margin: 5px;
+}
+
+.log {
+  clear: left;
+  width: 100%;
+}
+
+.log h2 {
+  text-align: center;
+}
+
+.greyed {
+  color: grey;
+}

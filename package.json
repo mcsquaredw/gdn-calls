@@ -1,0 +1,20 @@
+{
+  "name": "gdn",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.2",
+    "mongoose": "^5.2.10"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
