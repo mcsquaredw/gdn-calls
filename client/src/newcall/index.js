@@ -1,46 +1,20 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 import "./style.css";
 import Dropdown from "../dropdown";
 import Area from "../area";
 import Contractor from "../contractor";
-import Log from "../log";
+import { newCall } from "../api/calls";
 
 class NewCall extends Component {
   state = {
     area: "",
-    areas: [],
     contractor: "",
-    contractors: [],
     contactType: "",
-    contactTypes: [],
-    callType: "",
-    callTypes: [],
-    calls: []
+    callType: ""
   };
 
-  componentDidMount() {
-    axios
-      .all([
-        axios.get("/api/contacttype"),
-        axios.get("/api/area"),
-        axios.get("/api/contractor"),
-        axios.get("/api/calltype"),
-        axios.get("/api/calls")
-      ])
-      .then(
-        axios.spread((contactTypes, areas, contractors, callTypes, calls) => {
-          this.setState({
-            contactTypes: contactTypes.data,
-            areas: areas.data,
-            contractors: contractors.data,
-            callTypes: callTypes.data,
-            calls: calls.data
-          });
-        })
-      );
-  }
+  componentDidMount() {}
 
   update = ev => {
     const { name, value } = ev.target;
@@ -52,15 +26,15 @@ class NewCall extends Component {
 
   submitCall = ev => {
     const { contactType, area, contractor, callType } = this.state;
-    const newCall = {
+    const callObj = {
       contactType,
       area,
       contractor,
       callType
     };
 
-    this.newCallApi(newCall)
-      .then(call => {
+    newCall(callObj)
+      .then(savedCall => {
         this.setState({
           contactType: "",
           area: "",
@@ -68,46 +42,15 @@ class NewCall extends Component {
           callType: ""
         });
       })
-      .then(
-        this.callsApi().then(calls => {
-          this.setState({ calls });
-        })
-      )
       .catch(err => {
         console.error(err);
       });
   };
 
-  newCallApi = async newCall => {
-    try {
-      const response = await axios.post("/api/newcall", newCall);
-      return response.data;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  callsApi = async () => {
-    try {
-      const response = await axios.get("/api/calls");
-      return response.data;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   render() {
-    const {
-      contactType,
-      contactTypes,
-      callType,
-      callTypes,
-      area,
-      areas,
-      contractor,
-      contractors,
-      calls
-    } = this.state;
+    const { contactType, callType, area, contractor } = this.state;
+
+    const { contactTypes, callTypes, areas, contractors } = this.props;
 
     return (
       <div className="container">
@@ -148,16 +91,6 @@ class NewCall extends Component {
         </div>
         <div className="contractor">
           <Contractor contractor={contractor} contractors={contractors} />
-        </div>
-        <div className="log">
-          <h2>Calls Today</h2>
-          <Log
-            calls={calls}
-            contactTypes={contactTypes}
-            areas={areas}
-            contractors={contractors}
-            callTypes={callTypes}
-          />
         </div>
       </div>
     );

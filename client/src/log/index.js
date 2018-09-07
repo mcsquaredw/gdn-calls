@@ -2,10 +2,30 @@ import React, { Component } from "react";
 
 import NameFromList from "../namefromlist";
 import "./style.css";
+import { getCalls } from "../api/calls";
 
 export default class Log extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      calls: []
+    };
+  }
+
+  componentDidMount() {
+    getCalls()
+      .then(calls => {
+        this.setState({ calls });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   render() {
-    const { calls, contactTypes, areas, contractors, callTypes } = this.props;
+    const { contactTypes, areas, contractors, callTypes } = this.props;
+    const { calls } = this.state;
 
     return (
       <table className="call-log">

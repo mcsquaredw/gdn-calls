@@ -19,7 +19,9 @@ export default class Area extends Component {
           <EmbedMap
             title={`${currentArea.name} Map`}
             location={currentArea.name}
-          />
+          >
+            <b>Loading...</b>
+          </EmbedMap>
         </div>
       );
     } else {

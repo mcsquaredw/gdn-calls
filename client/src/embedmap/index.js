@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./style.css";
+
 export default class EmbedMap extends Component {
   render() {
     const { location, title } = this.props;

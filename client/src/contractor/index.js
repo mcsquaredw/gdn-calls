@@ -21,7 +21,9 @@ export default class Contractor extends Component {
                 <EmbedMap
                   title={`${currentContractor.name} Map`}
                   location={office.postcode}
-                />
+                >
+                  <b>Loading...</b>
+                </EmbedMap>
                 <br />
                 {office.address}
                 <br />
