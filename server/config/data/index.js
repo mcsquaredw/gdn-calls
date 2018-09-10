@@ -15,24 +15,31 @@ const contractors = require("./contractors");
 const areas = require("./areas");
 const users = require("./users");
 
-mongoose.connect(
-  config.MONGODB_URI,
-  { useNewUrlParser: true }
-);
+rebuildData = () => {
+  mongoose.connect(
+    config.MONGODB_URI,
+    { useNewUrlParser: true }
+  );
 
-rebuildData = async () => {
-  await CallType.collection.deleteMany();
-  await CallType.collection.insertMany(callTypes);
-  await Contractor.collection.deleteMany();
-  await Contractor.collection.insertMany(contractors);
-  await ContactType.collection.deleteMany();
-  await ContactType.collection.insertMany(contactTypes);
-  await Area.collection.deleteMany();
-  await Area.collection.insertMany(areas);
-  await Call.collection.deleteMany();
-  await User.collection.deleteMany();
-  await User.collection.insertMany(users);
+  try {
+    Contractor.collection.deleteMany(
+      {},
+      Contractor.collection.insertMany(contractors)
+    );
+    User.collection.deleteMany({}, User.collection.insertMany(users));
+    CallType.collection.deleteMany(
+      {},
+      CallType.collection.insertMany(callTypes)
+    );
+    ContactType.collection.deleteMany(
+      {},
+      ContactType.collection.insertMany(contactTypes)
+    );
+    Area.collection.deleteMany({}, Area.collection.insertMany(areas));
+    Call.collection.deleteMany({}, err => console.log(done));
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 rebuildData();
-console.log("Done Successfully!");

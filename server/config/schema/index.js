@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const area = Schema({
-  name: String,
-  contractors: [{ type: Schema.Types.ObjectId, ref: "Contractor" }]
+  name: String
 });
 
 const contactType = Schema({
@@ -12,7 +11,6 @@ const contactType = Schema({
 
 const contractor = Schema({
   name: String,
-  areas: [{ type: Schema.Types.ObjectId, ref: "Area" }],
   offices: [
     {
       address: String,

@@ -19,8 +19,10 @@ module.exports = app => {
   });
 
   passport.use(
-    new LocalStrategy(function(username, password, done) {
-      processLogin(username, password)
+    new LocalStrategy((username, password, done) => {
+      const hash = bcrypt.hashSync(password, 10);
+
+      User.findOne({ username })
         .then(user => {
           if (user) {
             return done(null, user);
@@ -29,6 +31,7 @@ module.exports = app => {
           }
         })
         .catch(err => {
+          console.error(err);
           return done(err);
         });
     })
@@ -36,9 +39,6 @@ module.exports = app => {
 
   processLogin = async (username, password) => {
     try {
-      const hash = await bcrypt.hash(password, 10);
-      const user = await User.findOne({ username });
-
       if (user) {
         const result = await bcrypt.compare(user.password, hash);
 
@@ -53,15 +53,8 @@ module.exports = app => {
     }
   };
 
-  app.post("/api/login", (req, res) => {
-    const { username, password } = req.body;
-
-    passport.authenticate("local", { failureRedirect: "/api/error" }, function(
-      req,
-      res
-    ) {
-      res.send({ authenticated: true });
-    });
+  app.post("/api/login", passport.authenticate("local"), (req, res) => {
+    res.send({ authenticated: true });
   });
 
   app.get("/api/error", (req, res) => {

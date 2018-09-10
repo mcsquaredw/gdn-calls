@@ -1,8 +1,7 @@
 module.exports = [
   {
     name: "N/A",
-    offices: [],
-    areas: []
+    offices: []
   },
   {
     name: "Powerdoors",
@@ -14,8 +13,7 @@ module.exports = [
         bookingRules: "Appointments 3-4 days in advance. Date and AM/PM",
         email: "info@powerdoors.co.uk"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Buckle and Jones",
@@ -27,8 +25,7 @@ module.exports = [
         bookingRules: "Appointments 3-4 days in advance. Date and AM/PM",
         email: "info@buckleandjones.co.uk"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Ace",
@@ -40,8 +37,7 @@ module.exports = [
         bookingRules: "Appointments 3-4 days in advance. Date and AM/PM",
         email: "enquiries@firstchoiceacegaragedoors.com"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Regal",
@@ -53,8 +49,7 @@ module.exports = [
         bookingRules: "Appointments 3-4 days in advance. Date and AM/PM",
         email: "info@regalgaragedoors.co.uk"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "JB",
@@ -66,8 +61,7 @@ module.exports = [
         bookingRules: "Appointments in diary",
         email: "sales@thegaragedoornetwork.com"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Zap",
@@ -93,8 +87,7 @@ module.exports = [
         bookingRules: "Appointments in diary for Phil",
         email: "christine@zapgaragedoors.co.uk"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Eastern",
@@ -106,8 +99,7 @@ module.exports = [
         bookingRules: "Appointments in Diary",
         email: "sales@easterngroupuk.com"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Doormatic",
@@ -133,8 +125,7 @@ module.exports = [
         bookingRules: "Appointments in diary for Chalfont office",
         email: "enquiries@doormatic.co.uk"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Don's Doors",
@@ -144,11 +135,10 @@ module.exports = [
           "Unit 9, Vicarage Farm Busines Park, Winchester Road, Eastleigh",
         postcode: "SO50 7HD",
         number: "02380600027",
-        bookingRules: "Appoointments 3-4 days in advance",
+        bookingRules: "Appointments 3-4 days in advance",
         email: "sales@donsgaragedoors.co.uk"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Up and Over",
@@ -160,8 +150,7 @@ module.exports = [
         bookingRules: "No date or time required.",
         email: "info@upandoverdoorsltd.co.uk"
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Exclusive",
@@ -173,8 +162,7 @@ module.exports = [
         bookingRules: "Appointments 3-4 days in advance. Date and AM/PM",
         email: ""
       }
-    ],
-    areas: []
+    ]
   },
   {
     name: "Shutter Spec Security",
@@ -186,7 +174,6 @@ module.exports = [
         bookingRules: "No date or time for appointments.",
         email: "info@shutterspecsecurity.co.uk"
       }
-    ],
-    areas: []
+    ]
   }
 ];
