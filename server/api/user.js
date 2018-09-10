@@ -37,22 +37,6 @@ module.exports = app => {
     })
   );
 
-  processLogin = async (username, password) => {
-    try {
-      if (user) {
-        const result = await bcrypt.compare(user.password, hash);
-
-        if (result) {
-          return user;
-        }
-      }
-
-      return null;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
     res.send({ authenticated: true });
   });

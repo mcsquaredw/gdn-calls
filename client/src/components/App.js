@@ -3,10 +3,11 @@ import { Link, Route, Switch } from "react-router-dom";
 
 import NewCall from "./newcall";
 import Log from "./log";
-import "../node_modules/reset-css/reset.css";
+import Login from "./login";
+import "../../node_modules/reset-css/reset.css";
 import "./App.css";
-import { getLookups } from "./api/calls";
-import { isAuthenticated } from "./api/auth";
+import { getLookups } from "../api/calls";
+import { isAuthenticated } from "../api/auth";
 
 class App extends Component {
   state = {
@@ -107,6 +108,12 @@ class App extends Component {
         </header>
         <div>
           <Switch>
+            <Route
+              path="/"
+              render={() => {
+                return <Login />;
+              }}
+            />
             <Route
               path="/newcall"
               render={() => {

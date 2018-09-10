@@ -4,7 +4,7 @@ import "./style.css";
 import Dropdown from "../dropdown";
 import Area from "../area";
 import Contractor from "../contractor";
-import { newCall } from "../api/calls";
+import { newCall } from "../../api/calls";
 
 class NewCall extends Component {
   state = {

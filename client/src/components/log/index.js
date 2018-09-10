@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import NameFromList from "../namefromlist";
 import "./style.css";
-import { getCalls } from "../api/calls";
+import { getCalls } from "../../api/calls";
 
 export default class Log extends Component {
   constructor(props) {
