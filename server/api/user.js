@@ -1,19 +1,18 @@
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
+const config = require("../config").getConfig();
 
-const { User } = require("../config/schema");
-
-module.exports = app => {
+module.exports = (app, db) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
   passport.serializeUser((user, cb) => {
-    cb(null, user.id);
+    cb(null, user._id);
   });
 
-  passport.deserializeUser((id, cb) => {
-    User.findById(id, (err, user) => {
+  passport.deserializeUser((_id, cb) => {
+    db.collection("users").findOne({ _id }, (err, user) => {
       cb(err, user);
     });
   });
@@ -22,34 +21,19 @@ module.exports = app => {
     new LocalStrategy((username, password, done) => {
       const hash = bcrypt.hashSync(password, 10);
 
-      User.findOne({ username })
-        .then(user => {
-          if (user) {
-            return done(null, user);
-          } else {
-            return done(null, false);
-          }
-        })
-        .catch(err => {
-          console.error(err);
-          return done(err);
-        });
+      db.collection("users").findOne({ username }, (err, user) => {
+        console.log(hash);
+        console.log(user.password);
+        if (user && bcrypt.compareSync(user.password, hash)) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
+      });
     })
   );
 
-  app.post("/api/login", passport.authenticate("local"), (req, res) => {
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
     res.send({ authenticated: true });
-  });
-
-  app.get("/api/error", (req, res) => {
-    res.send({ authenticated: false });
-  });
-
-  app.get("/api/authenticated", (req, res) => {
-    if (req.user) {
-      res.send({ authenticated: true });
-    } else {
-      res.send({ authenticated: false });
-    }
   });
 };

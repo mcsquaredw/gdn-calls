@@ -14,7 +14,8 @@ class App extends Component {
     areas: [],
     contractors: [],
     contactTypes: [],
-    callTypes: []
+    callTypes: [],
+    authenticated: false
   };
 
   componentDidMount() {

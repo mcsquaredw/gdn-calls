@@ -32,10 +32,20 @@ export default class Login extends Component {
       <div>
         <h1>Login</h1>
         <label htmlFor="username">Username</label>
-        <input type="text" value={username} />
+        <input
+          type="text"
+          value={username}
+          name="username"
+          onChange={this.changeUsername}
+        />
         <br />
         <label htmlFor="password">Password</label>
-        <input type="password" value={password} />
+        <input
+          type="password"
+          value={password}
+          name="password"
+          onChange={this.changePassword}
+        />
         <br />
         <button onClick={this.props.login}>Log In</button>
       </div>

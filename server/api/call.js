@@ -1,14 +1,7 @@
-const {
-  Area,
-  CallType,
-  Contractor,
-  ContactType,
-  Call
-} = require("../config/schema");
-
-module.exports = app => {
+module.exports = (app, db) => {
   app.get("/api/area", (req, res) => {
-    Area.find({})
+    db.collection("areas")
+      .find({})
       .sort({ name: 1 })
       .exec((err, results) => {
         if (err) {
@@ -19,7 +12,8 @@ module.exports = app => {
       });
   });
   app.get("/api/calltype", (req, res) => {
-    CallType.find({})
+    db.collection("calltypes")
+      .find({})
       .sort({ name: 1 })
       .exec((err, results) => {
         if (err) {
@@ -30,7 +24,8 @@ module.exports = app => {
       });
   });
   app.get("/api/contractor", (req, res) => {
-    Contractor.find({})
+    db.collection("contractors")
+      .find({})
       .sort({ name: 1 })
       .exec((err, results) => {
         if (err) {
@@ -41,7 +36,8 @@ module.exports = app => {
       });
   });
   app.get("/api/contacttype", (req, res) => {
-    ContactType.find({})
+    db.collection("contacttypes")
+      .find({})
       .sort({ name: 1 })
       .exec((err, results) => {
         if (err) {
@@ -54,7 +50,7 @@ module.exports = app => {
   app.post("/api/newcall", (req, res) => {
     const newCall = new Call(req.body);
 
-    newCall.save((err, call) => {
+    db.collection("calls").insert({ newCall }, (err, call) => {
       if (err) {
         console.error(err);
       } else {
@@ -69,7 +65,8 @@ module.exports = app => {
     start.setHours(0, 0, 0, 0);
     end.setHours(23, 59, 59, 999);
 
-    Call.find({ createdAt: { $gte: start, $lt: end } })
+    db.collection("calls")
+      .find({ createdAt: { $gte: start, $lt: end } })
       .sort({ createdAt: 1 })
       .exec((err, results) => {
         if (err) {
