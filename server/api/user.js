@@ -1,39 +1,37 @@
-const passport = require("passport");
-const bcrypt = require("bcrypt");
-const LocalStrategy = require("passport-local").Strategy;
+const passwordless = require('passwordless');
+const MongoStore = require('passwordless-mongostore');
+const email = require('emailjs');
+
 const config = require("../config").getConfig();
+const { user, password, host, ssl } = config.EMAIL;
+
+const smtpServer = email.server.connect({
+  user, password, host, ssl
+});
+
 
 module.exports = (app, db) => {
-  app.use(passport.initialize());
-  app.use(passport.session());
-
-  passport.serializeUser((user, cb) => {
-    cb(null, user._id);
-  });
-
-  passport.deserializeUser((_id, cb) => {
-    db.collection("users").findOne({ _id }, (err, user) => {
-      cb(err, user);
-    });
-  });
-
-  passport.use(
-    new LocalStrategy((username, password, done) => {
-      const hash = bcrypt.hashSync(password, 10);
-
-      db.collection("users").findOne({ username }, (err, user) => {
-        console.log(hash);
-        console.log(user.password);
-        if (user && bcrypt.compareSync(user.password, hash)) {
-          return done(null, user);
-        } else {
-          return done(null, false);
+  app.use(passwordless.sessionSupport());
+  app.use(passwordless.acceptToken({successRedirect: '/'}));
+  
+  passwordless.init(new MongoStore(config.MONGODB_URI));
+  passwordless.addDelivery(
+    (tokenToSend, uidToSend, recipient, cb) => {
+      var host = config.HOST;
+      smtpServer.send({
+        text: "",
+        from: "sales@thegaragedoornetwork.com",
+        to: recipient,
+        subject: "GDN Call Log - Sign In",
+        attachment: [
+          {data:`<html>To Log In To The Garage Door Network Call Log, please click this link: <a href="${host}?token=${tokenToSend}&uid=${encodeUriComponent(uidToSend)}"</html>`}
+        ]
+      }, (err, message) => {
+        if(err) {
+          console.eror(err);
         }
+        cb(err);
       });
-    })
-  );
-
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    res.send({ authenticated: true });
-  });
+    }
+  )
 };

@@ -2,7 +2,7 @@ const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
 
 const config = require("../index");
-const contactTypes = require("./contactTypes");
+const contactTypes = require("./contacttypes");
 const callTypes = require("./calltypes");
 const contractors = require("./contractors");
 const areas = require("./areas");

@@ -1,53 +1,21 @@
 import React, { Component } from "react";
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: ""
-    };
-  }
-
-  changeUsername = ev => {
-    const { username } = ev.target.value;
-
-    this.setState({
-      username
-    });
-  };
-
-  changePassword = ev => {
-    const { password } = ev.target.value;
-
-    this.setState({
-      password
-    });
-  };
-
   render() {
-    const { username, password } = this.state;
+    const { requestToken, changeUsername, username } = this.props;
 
     return (
       <div>
         <h1>Login</h1>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Email Address: </label>
         <input
           type="text"
           value={username}
           name="username"
-          onChange={this.changeUsername}
+          onChange={changeUsername}
         />
         <br />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          value={password}
-          name="password"
-          onChange={this.changePassword}
-        />
-        <br />
-        <button onClick={this.props.login}>Log In</button>
+        <button onClick={requestToken}>Request Login Token</button>
       </div>
     );
   }

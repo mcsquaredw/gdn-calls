@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
 const MongoClient = require("mongodb").MongoClient;
@@ -8,6 +9,13 @@ const env = process.env.NODE_ENV || "DEVELOPMENT";
 const config = require("./config").getConfig();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('trust proxy', 1);
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure:true}
+}));
 
 if (env === "PRODUCTION") {
   app.use(express.static(__dirname + "./../client/build/"));

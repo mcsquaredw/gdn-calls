@@ -3,7 +3,7 @@ module.exports = (app, db) => {
     db.collection("areas")
       .find({})
       .sort({ name: 1 })
-      .exec((err, results) => {
+      .toArray((err, results) => {
         if (err) {
           console.log(err);
         } else {
@@ -15,7 +15,7 @@ module.exports = (app, db) => {
     db.collection("calltypes")
       .find({})
       .sort({ name: 1 })
-      .exec((err, results) => {
+      .toArray((err, results) => {
         if (err) {
           console.log(err);
         } else {
@@ -27,7 +27,7 @@ module.exports = (app, db) => {
     db.collection("contractors")
       .find({})
       .sort({ name: 1 })
-      .exec((err, results) => {
+      .toArray((err, results) => {
         if (err) {
           console.log(err);
         } else {
@@ -39,7 +39,7 @@ module.exports = (app, db) => {
     db.collection("contacttypes")
       .find({})
       .sort({ name: 1 })
-      .exec((err, results) => {
+      .toArray((err, results) => {
         if (err) {
           console.log(err);
         } else {
@@ -68,7 +68,7 @@ module.exports = (app, db) => {
     db.collection("calls")
       .find({ createdAt: { $gte: start, $lt: end } })
       .sort({ createdAt: 1 })
-      .exec((err, results) => {
+      .toArray((err, results) => {
         if (err) {
           console.log(err);
         } else {
